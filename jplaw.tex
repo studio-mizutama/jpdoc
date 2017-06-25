@@ -1,0 +1,66 @@
+
+\makeatletter
+\def\@iroha#1{%
+\ifcase#1\or イ\or ロ\or ハ\or ニ\or ホ\or ヘ\or ト\or チ\or リ\or ヌ\or ル\or ヲ\or ワ\or カ\or ヨ\or タ\or レ\or ソ\or ツ\or ネ\or ナ\or ラ\or ム\or ウ\or ヰ\or ノ\or オ\or ク\or ヤ\or マ\or ケ\or フ\or コ\or エ\or テ\or ア\or サ\or キ\or ユ\or メ\or ミ\or シ\or ヱ\or ヒ\or モ\or セ\or ス\else\@ctrerr\fi}
+\def\@kanji#1{%
+\ifcase#1 〇\or 一\or 二\or 三\or 四\or 五\or 六\or 七\or 八\or 九\or 十\or 十一\or 十二\or 十三\or 十四\or 十五\or 十六\or 十七\or 十八\or 十九\or 二十\or 二十一\or 二十二\or 二十三\or 二十四\or 二十五\or 二十六\or 二十七\or 二十八\or 二十九\or 三十\or 三十一\or 三十二\or 三十三\or 三十四\or 三十五\or 三十六\or 三十七\or 三十八\or 三十九\or 四十\or 四十一\or 四十二\or 四十三\or 四十四\or 四十五\or 四十六\or 四十七\or 四十八\or 四十九\or 五十\or 五十一\or 五十二\or 五十三\or 五十四\or 五十五\or 五十六\or 五十七\or 五十八\or 五十九\or 六十\or 六十一\or 六十二\or 六十三\or 六十四\or 六十五\or 六十六\or 六十七\or 六十八\or 六十九\or 七十\or 七十一\or 七十二\or 七十三\or 七十四\or 七十五\or 七十六\or 七十七\or 七十八\or 七十九\or 八十\or 八十一\or 八十二\or 八十三\or 八十四\or 八十五\or 八十六\or 八十七\or 八十八\or 八十九\or 九十\or 九十一\or 九十二\or 九十三\or 九十四\or 九十五\or 九十六\or 九十七\or 九十八\or 九十九 \else\@ctrerr\fi\relax}
+\def\@suji#1{%
+\ifcase#1０\or １\or ２\or ３\or ４\or ５\or ６\or ７\or ８\or ９\or １０\or １１\or １２\or １３\or １４\or １５\or １６\or １７\or １８\or １９\or ２０\or ２１\or ２２\or ２３\or ２４\or ２５\or ２６\or ２７\or ２８\or ２９\or ３０\or ３１\or ３２\or ３３\or ３４\or ３５\or ３６\or ３７\or ３８\or ３９\or ４０\or ４１\or ４２\or ４３\or ４４\or ４５\or ４６\or ４７\or ４８\or ４９\or ５０\or ５１\or ５２\or ５３\or ５４\or ５５\or ５６\or ５７\or ５８\or ５９\or ６０\or ６１\or ６２\or ６３\or ６４\or ６５\or ６６\or ６７\or ６８\or ６９\or ７０\or ７１\or ７２\or ７３\or ７４\or ７５\or ７６\or ７７\or ７８\or ７９\or ８０\or ８１\or ８２\or ８３\or ８４\or ８５\or ８６\or ８７\or ８８\or ８９\or ９０\or ９１\or ９２\or ９３\or ９４\or ９５\or ９６\or ９７\or ９８\or ９９　\else\@ctrerr\fi\relax}
+
+\def\iroha#1{\expandafter\@iroha\csname c@#1\endcsname}%
+\def\kanji#1{\expandafter\@kanji\csname c@#1\endcsname}%
+\def\suji#1{\expandafter\@suji\csname c@#1\endcsname}%
+
+\renewcommand{\thesection}{第\kanji{section}編}
+\renewcommand{\thesubsection}{第\kanji{subsection}章}
+\renewcommand{\thesubsubsection}{第\kanji{subsubsection}節}
+\newcommand{\thearticle}{第\suji{Article}条}
+\newcommand{\thesubarticle}{第\suji{Article}条の\suji{Branch}}
+\newcommand{\theterm}{第{\thetermno}項}
+\newcommand{\theitem}{第{\theitemi}号 \theitemii \ifnum \value{enumiii}>0 \theitemiii \fi}
+
+\newcommand{\thetermno}{\suji{TermNo}}
+\newcommand{\theitemi}{\kanji{enumi}}
+\newcommand{\theitemii}{\iroha{enumii}}
+\newcommand{\theitemiii}{(\arabic{enumiii})}
+\renewcommand{\labelenumi}{\theitemi}
+\renewcommand{\labelenumii}{\theitemii}
+\renewcommand{\labelenumiii}{(\theitemiii}
+\newcommand{\itm}{\item\protected@edef\@currentlabel{\theitem}}
+
+\def\section{\@startsection{section}{1}{-40pt}{15pt}{10pt}{\normalfont\Large\bfseries\centering}}
+\setlength{\labelsep}{10pt}
+\setlength\intextsep{10pt}
+\newcounter{Article}
+\setcounter{Article}{0} 
+\newcounter{TermNo}[Article]
+\setcounter{TermNo}{0} 
+\newcounter{Branch}[Article]
+\setcounter{Branch}{0} 
+
+\newcommand\article[1]{%
+\refstepcounter{Article}%
+\setcounter{TermNo}{1}%
+\protected@edef\@currentlabel{\thearticle}%
+\setcounter{TermNo}{1}\setcounter{Branch}{1}%
+\par\vspace{3mm}\normalfont\normalsize(#1)%
+\par\noindent\hangindent=20mm%
+\makebox[20mm][l]{\thearticle}%
+}
+\newcommand\subarticle[1]{%
+\refstepcounter{Branch}%
+\setcounter{TermNo}{1}%
+\protected@edef\@currentlabel{\thesubarticle}%
+\par\vspace{3mm}\normalfont\normalsize(#1)%
+\par\noindent\hangindent=20mm%
+\makebox[20mm][l]{\thesubarticle}%
+}
+
+\newcommand\term{%
+\refstepcounter{TermNo}%
+\protected@edef\@currentlabel{\ifnum\value{Branch}>1\thesubarticle\theterm\else\thearticle\theterm\fi}
+\par\vspace{1mm}\noindent\hangindent=20mm
+\makebox[20mm][l]{\hspace{0.5em}\thetermno}%
+}
+\setlength{\leftmargini}{20mm}  
+\makeatother
