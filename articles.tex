@@ -1,8 +1,26 @@
-\documentclass[11pt,a4paper]{jsarticle}
-%
+\documentclass[10pt,a4paper]{jsarticle}
 \usepackage{bm}
 \usepackage{graphicx}
-\input{jplaw.tex}
+\usepackage[truedimen,left=25truemm,right=25truemm,top=25truemm,bottom=25truemm]{geometry}
+\usepackage{jpdoc}
+
+\newcounter{NumOfMembers}\setcounter{NumOfMembers}{1}
+\newcounter{DocumentsPerMember}\setcounter{DocumentsPerMember}{1}
+\def\Name#1{\ifcase#1\or
+株式会社科学計算総合研究所\or%甲
+\else\fi}
+
+\def\Address#1{\ifcase#1\or
+東京都千代田区丸の内二丁目２番３号 \or%甲
+\else\fi}
+
+\def\Representative#1{\ifcase#1\or
+代表取締役 井原 遊 \or%甲
+\else\fi}
+
+\def\BlankSignature#1{\ifcase#1\or
+0\or%甲
+0\else0\fi}
 
 \begin{document}
 \title{株式会社科学計算総合研究所\\定款}
@@ -85,15 +103,13 @@
 
 
 \vspace{20pt}
-\begin{flushright}
-  \和暦\today
-  \vspace{10pt}
+上記は当会社の現行定款と相違ない。\\
 
-  上記は当会社の現行定款と相違ない。\\
-  \vspace{10pt}
-  東京都文京区本郷七丁目３番１号\\
-  東京大学アントレプレナープラザ\\
-  株式会社科学計算総合研究所\\
-  代表取締役 井原遊
-\end{flushright}
+\begin{flushleft} 
+\today\\
+\vspace{10pt}
+\MakeSignatureField
+
+
+\end{flushleft}
 \end{document}
