@@ -1,4 +1,4 @@
-\ProvidesPackage{jpdoc}[2019/05/14 v1.1]
+\ProvidesPackage{jpdoc}[2020/09/17 v1.2]
 \usepackage{multirow}
 \usepackage{ifthen}
 
@@ -14,7 +14,7 @@
 
 \def\SignatureMethod{署名又は記名押印}
 \def\LastSentence{\newcount \numofpaper\numofpaper=\value{NumOfMembers}\multiply \numofpaper by \value{DocumentsPerMember}本書面を\漢数字{\numofpaper}通作成し、\AllMembers
-が、\SignatureMethod、各\漢数字{\value{DocumentsPerMember}}通を保有する。}
+が、\SignatureMethod し、各\漢数字{\value{DocumentsPerMember}}通を保有する。}
 
 \def\LastSentenceElectric{\newcount \numofpaper\numofpaper=\value{NumOfMembers}\multiply \numofpaper by \value{DocumentsPerMember}電磁的記録である本書面を作成し、\AllMembers
 が、これに電子署名する。}
