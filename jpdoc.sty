@@ -1,4 +1,4 @@
-\ProvidesPackage{jpdoc}[2020/09/17 v1.2]
+\ProvidesPackage{jpdoc}[2021/06/14 v1.3]
 \usepackage{multirow}
 \usepackage{ifthen}
 
@@ -163,29 +163,35 @@
 \newcounter{Branch}[Article]
 \setcounter{Branch}{0} 
 
+\renewcommand\subsection[1]{%
+\refstepcounter{subsection}%
+\protected@edef\@currentlabel{\thesubsection}%
+\par\vspace{10mm}\normalfont\Large\bfseries\centerline{\thesubsection\hspace{5mm}#1}%
+\mdseries}
+
 \newcommand\article[1]{%
 \refstepcounter{Article}%
 \setcounter{TermNo}{1}%
 \protected@edef\@currentlabel{\thearticle}%
 \setcounter{TermNo}{1}\setcounter{Branch}{1}%
-\par\vspace{3mm}\normalfont\normalsize(#1)%
+\par\vspace{3mm}\normalfont\normalsize\bfseries(#1)%
 \par\noindent\hangindent=20mm%
-\makebox[20mm][l]{\thearticle}%
-}
+\makebox[20mm][l]{\hspace{3mm}\thearticle}%
+\mdseries}
 \newcommand\subarticle[1]{%
 \refstepcounter{Branch}%
 \setcounter{TermNo}{1}%
 \protected@edef\@currentlabel{\thesubarticle}%
-\par\vspace{3mm}\normalfont\normalsize(#1)%
+\par\vspace{3mm}\normalfont\normalsize\bfseries(#1)%
 \par\noindent\hangindent=20mm%
-\makebox[20mm][l]{\thesubarticle}%
-}
+\makebox[20mm][l]{\hspace{3mm}\thesubarticle}%
+\mdseries}
 
 \newcommand\term{%
 \refstepcounter{TermNo}%
 \protected@edef\@currentlabel{\ifnum\value{Branch}>1\thesubarticle\theterm\else\thearticle\theterm\fi}
 \par\vspace{1mm}\noindent\hangindent=20mm
-\makebox[20mm][l]{\hspace{0.5em}\thetermno}%
+\makebox[20mm][l]{\hspace{2em}\thetermno}%
 }
 \setlength{\leftmargini}{20mm}  
 
